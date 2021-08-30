@@ -1,12 +1,12 @@
 package com.leantech.demo.entitiy;
 
-import lombok.Data;
+
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.List;
-import java.util.Set;
+
 
 @Entity
 @Table(name = "employee")
@@ -17,11 +17,11 @@ public class Employee {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    @OneToMany(mappedBy="employee")
+    @OneToMany(mappedBy = "employee")
     private List<Person> personList;
 
     @ManyToOne
-    @JoinColumn(name="position_id", nullable=false)
+    @JoinColumn(name = "position_id", nullable = false)
     private Position position;
 
     private float salary;

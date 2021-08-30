@@ -1,7 +1,6 @@
 package com.leantech.demo.controller;
 
 import com.leantech.demo.entitiy.Employee;
-import com.leantech.demo.repository.EmployeeRepository;
 import com.leantech.demo.service.EmployeeService;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;

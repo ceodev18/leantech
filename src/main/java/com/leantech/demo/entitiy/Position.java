@@ -18,6 +18,6 @@ public class Position {
 
     private String name;
 
-    @OneToMany(mappedBy="position")
+    @OneToMany(mappedBy = "position")
     private List<Employee> employeeList;
 }

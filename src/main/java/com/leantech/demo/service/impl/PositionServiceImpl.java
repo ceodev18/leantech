@@ -9,16 +9,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
+
 
 @Service
 @Slf4j
 public class PositionServiceImpl implements PositionService {
     @Autowired
     PositionRepository positionRepository;
+
     @Override
     public Position add(Position position) {
-        Position _position= positionRepository.save(position);
+        Position _position = positionRepository.save(position);
         return _position;
 
     }

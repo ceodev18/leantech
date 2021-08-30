@@ -1,7 +1,5 @@
 package com.leantech.demo.controller;
 
-
-import com.leantech.demo.entitiy.Employee;
 import com.leantech.demo.entitiy.Position;
 import com.leantech.demo.service.PositionService;
 import io.swagger.annotations.ApiOperation;
@@ -11,8 +9,6 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import java.util.List;
 
 @RestController
@@ -57,22 +53,22 @@ public class PositionController {
 
     @GetMapping(value = "/position")
     @ApiOperation(value = "Get all positions", response = Position.class, responseContainer = "List")
-    public ResponseEntity<List<Position>>getAll() {
-        try{
+    public ResponseEntity<List<Position>> getAll() {
+        try {
             List<Position> list = positionService.getAll();
             return new ResponseEntity<>(list, HttpStatus.OK);
-        }catch (Exception e){
+        } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
     @GetMapping(value = "/position/{id}")
     @ApiOperation(value = "Get one position", response = Position.class)
-    public ResponseEntity<Position>getOne(@PathVariable("id") long id) {
-        try{
+    public ResponseEntity<Position> getOne(@PathVariable("id") long id) {
+        try {
             Position _position = positionService.getOne(id);
             return new ResponseEntity<>(_position, HttpStatus.OK);
-        }catch (Exception e){
+        } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }

@@ -15,6 +15,6 @@ public class Person {
     private long id;
 
     @ManyToOne
-    @JoinColumn(name="employee_id", nullable=false)
+    @JoinColumn(name = "employee_id", nullable = false)
     private Employee employee;
 }
