@@ -2,6 +2,8 @@ package com.leantech.demo.service;
 
 
 import com.leantech.demo.entitiy.Position;
+import com.leantech.demo.payload.PersonResponse;
+import com.leantech.demo.payload.PositionResponse;
 
 import java.util.List;
 
@@ -15,4 +17,6 @@ public interface PositionService {
     List<Position> getAll();
 
     Position getOne(long id);
+
+    List<PositionResponse> getAllv2(EmployeeService employeeService);
 }

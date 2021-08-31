@@ -1,23 +1,23 @@
 package com.leantech.demo.entitiy;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
-import java.util.List;
+import java.io.Serializable;
 
 
 @Entity
 @Table(name = "position")
-@Getter
-@Setter
-public class Position {
+@Data
+@ToString
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
+public class Position implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
     private String name;
 
-    @OneToMany(mappedBy = "position")
-    private List<Employee> employeeList;
 }

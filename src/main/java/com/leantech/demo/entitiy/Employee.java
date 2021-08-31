@@ -1,31 +1,43 @@
 package com.leantech.demo.entitiy;
 
 
-import lombok.Getter;
-import lombok.Setter;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.sun.istack.NotNull;
+import lombok.*;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
-import java.util.List;
+import java.io.Serializable;
 
 
 @Entity
 @Table(name = "employee")
-@Getter
-@Setter
-public class Employee {
+@Data
+@Builder
+@ToString
+@AllArgsConstructor
+@NoArgsConstructor
+public class Employee implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    @OneToMany(mappedBy = "employee")
-    private List<Person> personList;
+    @NotNull
+    @JsonIgnore
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "person_id", nullable = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    private Person person;
 
-    @ManyToOne
+    @NotNull
+    @JsonIgnore
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "position_id", nullable = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private Position position;
 
-    private float salary;
 
-    private String name;
+    private float salary;
 
 }
