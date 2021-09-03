@@ -1,7 +1,6 @@
 package com.leantech.demo.controller;
 
 import com.leantech.demo.entitiy.Employee;
-import com.leantech.demo.entitiy.Person;
 import com.leantech.demo.payload.EmployeeResponse;
 import com.leantech.demo.payload.NewEmployeePersonRequest;
 import com.leantech.demo.payload.NewEmployeeRequest;
@@ -37,6 +36,7 @@ public class EmployeeController {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
     @PostMapping(value = "/employee/person", produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Adding a new employee with position id and person data", response = Employee.class)
     public ResponseEntity<Employee> addEmployeeWithPerson(@RequestBody NewEmployeePersonRequest NewEmployeePersonRequest) {
@@ -64,21 +64,22 @@ public class EmployeeController {
     public ResponseEntity<List<EmployeeResponse>> getAll(@RequestParam(required = false) String position, @RequestParam(required = false) String name) {
         try {
             List<EmployeeResponse> list;
-            if(position.isBlank() && name.isBlank()){
-                list = employeeService.getAllResponse();
-            }else if(!position.isBlank() && name.isBlank()){
+
+            if (position != null) {
                 list = employeeService.getAllResponseByPosition(position);
-            }else if(!name.isBlank() && position.isBlank()){
-                list= null;
-            }else{
-                list = null;
+            } else if (name != null) {
+                list = employeeService.getAllResponseByPosition(name);
+            } else {
+                list = employeeService.getAllResponse();
             }
+
 
             return new ResponseEntity<>(list, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
     @DeleteMapping(value = "/employee/{id}")
     @ApiOperation(value = "Delete employee", response = HttpStatus.class)
     public ResponseEntity<HttpStatus> deleteEmployee(@PathVariable("id") long id) {

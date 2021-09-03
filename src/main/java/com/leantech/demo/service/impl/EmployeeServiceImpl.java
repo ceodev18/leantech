@@ -113,24 +113,28 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public List<EmployeeResponse> getAllResponseByPosition(String position) {
+    public List<EmployeeResponse> getAllResponseByPosition(String name) {
         List<EmployeeResponse> list = new ArrayList<>();
-        for (Employee e : employeeRepository.findAll()) {
-            Person p = e.getPerson();
-            list.add(EmployeeResponse.builder()
-                    .id(e.getId())
-                    .salary(e.getSalary())
-                    .person(PersonResponse.builder()
-                            .name(p.getName())
-                            .lastName(p.getLastName())
-                            .address(p.getAddress())
-                            .cellphone(p.getCellphone())
-                            .cityName(p.getCityName())
-                            .build())
-                    .build()
-            );
+        Position position = positionRepository.findByName(name);
+        if (position != null) {
+            for (Employee e : employeeRepository.findByPosition(position)) {
+                Person p = e.getPerson();
+                list.add(EmployeeResponse.builder()
+                        .id(e.getId())
+                        .salary(e.getSalary())
+                        .person(PersonResponse.builder()
+                                .name(p.getName())
+                                .lastName(p.getLastName())
+                                .address(p.getAddress())
+                                .cellphone(p.getCellphone())
+                                .cityName(p.getCityName())
+                                .build())
+                        .build()
+                );
 
+            }
         }
+
         return list;
     }
 
