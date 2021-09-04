@@ -1,4 +1,4 @@
-# Proyecto SpringBoot con H2
+# Evaluación Lean Tech - Proyecto SpringBoot con H2
 ![image](https://user-images.githubusercontent.com/20958764/132104654-07348c4b-39ac-4e8e-9fb4-21c559a432c9.png)
 
 
