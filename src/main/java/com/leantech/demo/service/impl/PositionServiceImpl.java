@@ -36,11 +36,6 @@ public class PositionServiceImpl implements PositionService {
     }
 
     @Override
-    public void delete(long id) {
-        positionRepository.delete(positionRepository.findById(id).get());
-    }
-
-    @Override
     public List<Position> getAll() {
         return positionRepository.findAll();
     }

@@ -12,7 +12,7 @@ import java.util.List;
 public interface EmployeeService {
     Employee add(final NewEmployeeRequest newEmployeeRequest);
 
-    Employee update(final Employee employee);
+    void update(long id, final NewEmployeeRequest employee);
 
     List<Employee> getAll();
 

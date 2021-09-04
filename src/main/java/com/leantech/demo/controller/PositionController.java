@@ -5,6 +5,7 @@ import com.leantech.demo.payload.NewPositionRequest;
 import com.leantech.demo.payload.PositionResponse;
 import com.leantech.demo.service.EmployeeService;
 import com.leantech.demo.service.PositionService;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@Api(tags = "API Rest de posicion", description = "Operaciones añadir o listar")
 @RestController
 @RequestMapping("/v1/api")
 public class PositionController {
@@ -23,7 +25,7 @@ public class PositionController {
     EmployeeService employeeService;
 
     @PostMapping(value = "/position", produces = MediaType.APPLICATION_JSON_VALUE)
-    @ApiOperation(value = "Adding a new position", response = Position.class)
+    @ApiOperation(value = "Añadir una posicion", response = Position.class)
     public ResponseEntity<Position> addPosition(@RequestBody NewPositionRequest newPositionRequest) {
         try {
             Position _position = positionService.add(Position.builder().name(newPositionRequest.getName()).build());
@@ -34,7 +36,7 @@ public class PositionController {
     }
 
     @PutMapping(value = "/position", produces = MediaType.APPLICATION_JSON_VALUE)
-    @ApiOperation(value = "Updating a position", response = Position.class)
+    @ApiOperation(value = "Actualizar a position", response = Position.class)
     public ResponseEntity<Position> updatePosition(@RequestBody Position position) {
         try {
             Position _position = positionService.update(position);
@@ -44,20 +46,8 @@ public class PositionController {
         }
     }
 
-    @DeleteMapping(value = "/position/{id}")
-    @ApiOperation(value = "Delete position", response = HttpStatus.class)
-    public ResponseEntity<HttpStatus> deletePosition(@PathVariable("id") long id) {
-        try {
-            positionService.delete(id);
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-        } catch (Exception e) {
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }
-
-
     @GetMapping(value = "/position")
-    @ApiOperation(value = "Get all positions", response = Position.class, responseContainer = "List")
+    @ApiOperation(value = "Listar todas las posiciones", response = Position.class, responseContainer = "List")
     public ResponseEntity<List<Position>> getAll() {
         try {
             List<Position> list = positionService.getAll();
@@ -68,7 +58,7 @@ public class PositionController {
     }
 
     @GetMapping(value = "/position/{id}")
-    @ApiOperation(value = "Get one position", response = Position.class)
+    @ApiOperation(value = "Consultar una posicion", response = Position.class)
     public ResponseEntity<Position> getOne(@PathVariable("id") long id) {
         try {
             Position _position = positionService.getOne(id);
@@ -78,14 +68,5 @@ public class PositionController {
         }
     }
 
-    @GetMapping(value = "/position/v2")
-    @ApiOperation(value = "Get all positions v2", response = PositionResponse.class, responseContainer = "List")
-    public ResponseEntity<List<PositionResponse>> getAllv2() {
-        try {
-            List<PositionResponse> per = positionService.getAllv2(employeeService);
-            return new ResponseEntity<>(per, HttpStatus.OK);
-        } catch (Exception e) {
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }
+
 }

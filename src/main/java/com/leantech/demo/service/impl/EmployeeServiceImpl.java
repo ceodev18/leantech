@@ -49,12 +49,13 @@ public class EmployeeServiceImpl implements EmployeeService {
         return employee;
     }
 
+
     @Override
-    public Employee update(Employee employee) {
-        Employee existing = employeeRepository.findById(employee.getId()).get();
-        Handler.copyNonNullProperties(employee, existing);
-        Employee _employee = employeeRepository.save(existing);
-        return _employee;
+    public void update(long id, final NewEmployeeRequest newEmployeeRequest) {
+        Employee existing = employeeRepository.findById(id).get();
+        existing.setPosition(positionRepository.findById(newEmployeeRequest.getPosition_id()).get());
+        //we can only update salary and position, otherwise we should create another employee if we gonna change
+        //the person id
     }
 
     @Override

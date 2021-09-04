@@ -5,6 +5,7 @@ import com.leantech.demo.entitiy.Person;
 import com.leantech.demo.entitiy.Position;
 import com.leantech.demo.payload.NewPersonRequest;
 import com.leantech.demo.service.PersonService;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@Api(tags = "API Rest de personas", description = "Operaciones añadir o listar")
 @RestController
 @RequestMapping("/v1/api")
 public class PersonController {
@@ -21,7 +23,7 @@ public class PersonController {
     PersonService personService;
 
     @PostMapping(value = "/person", produces = MediaType.APPLICATION_JSON_VALUE)
-    @ApiOperation(value = "Adding a new person", response = Person.class)
+    @ApiOperation(value = "Añadir una persona", response = Person.class)
     public ResponseEntity<Person> addPerson(@RequestBody NewPersonRequest newPersonRequest) {
         try {
             Person _person = personService.add(newPersonRequest);
@@ -32,7 +34,7 @@ public class PersonController {
     }
 
     @GetMapping(value = "/person")
-    @ApiOperation(value = "Get all persons", response = Person.class, responseContainer = "List")
+    @ApiOperation(value = "Listar todas las personas", response = Person.class, responseContainer = "List")
     public ResponseEntity<List<Person>> getAll() {
         try {
             List<Person> list = personService.getAll();
