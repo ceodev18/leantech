@@ -29,7 +29,7 @@ public class SwaggerConfiguration {
     // TODO: take these as properties
     private ApiInfo metaData() {
         ApiInfo apiInfo = new ApiInfo(
-                "RabbiEat Backend Services",
+                "LeanTech Backend Services",
                 "Spring Boot REST API for Online Store",
                 "1.0.0",
                 "Terms of service",
